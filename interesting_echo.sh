@@ -1,4 +1,7 @@
 #!/bin/bash
+#
+# zhuzhu 2019-05-09
+# 
 
 stty intr undef
 stty -echo
@@ -10,11 +13,11 @@ Contact="QQ: xxxxxx, TEL: 138xxxxxxxx"
 Git="Download: https://github.com/zshmmm/shell.git"
 
 waitt(){
-    sleep $1
+    speed=0.05
+    sleep $speed
 }
 
 loading(){
-    speed=0.05
     echo -en "\033[?25l"
     i=1
     while [ $i -le 100 ]
@@ -23,12 +26,13 @@ loading(){
         echo -en "\033[0;106H"
         if [ $i -eq 100 ]
         then
-            echo -en "load done!          ";
+            echo -en "\033[K"
+            echo -en "load done!"
         else
-            echo -en "loading... $i%";
+            echo -en "loading... $i%"
         fi
         echo -en "\033[0;$((i+1))H"
-        waitt $speed
+        waitt
         let i++
     done
     echo -en "\033[0;102H"
@@ -36,13 +40,13 @@ loading(){
     while [ $i -le 10 ]
     do
         echo -en "\b/"
-        waitt $speed
+        waitt
         echo -en "\b-"
-        waitt $speed
+        waitt
         echo -en "\b\\"
-        waitt $speed
+        waitt
         echo -en "\b|"
-        waitt $speed
+        waitt
         let i++
     done
     echo -en "\b "
@@ -50,18 +54,17 @@ loading(){
 }
 
 printstr(){
-    echo -en "\\033[47;36m" 
-    echo -ne "\n\n\t\t"
-    echo $1 | awk -F '' '{for(i=1;i<=NF;i++){printf $i; system("sleep 0.1")}; printf "\n"}'
-    echo -en "\\033[0m"
+    echo -en "\033[47;36m" 
+    echo -en "\n\n\t\t"
+    echo -e $1 | awk -F '' '{for(i=1;i<=NF;i++){printf $i; system("sleep 0.1")}; printf "\n"}'
+    echo -en "\033[0m"
 }
 
 loading
 printstr "$Corp"
 printstr "$Welcome"
 printstr "$Contact"
-printstr "$Git"
 
-echo -ne "\n\n\t\t\n"
+echo -en "\n\n\t\t\n"
 stty intr ^c
 stty echo
