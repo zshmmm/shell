@@ -2,6 +2,10 @@
 #
 # zhuzhu 2019-05-09
 # 
+# Env OS: CentOS Linux release 7.1.1503 (Core), BashShell: GNU bash, version 4.2.46(1)-release (x86_64-redhat-linux-gnu)
+# 
+# git: https://github.com/zshmmm/shell.git
+# 
 
 stty intr undef
 stty -echo
@@ -9,7 +13,7 @@ clear
 
 Corp="Corpright 2018-2019 xxx xxx All Rights Reserved"
 Welcome="Welcome Use This xxx Tools!"
-Contact="QQ: xxxxxx, TEL: 138xxxxxxxx"
+Contact="WX: xxxxxxxxxx, QQ: xxxxxx, TEL: 138xxxxxxxx"
 Git="Download: https://github.com/zshmmm/shell.git"
 
 waitt(){
@@ -61,9 +65,11 @@ printstr(){
 }
 
 loading
-printstr "$Corp"
+
 printstr "$Welcome"
 printstr "$Contact"
+printstr "$Git"
+printstr "$Corp"
 
 echo -en "\n\n\t\t\n"
 stty intr ^c
